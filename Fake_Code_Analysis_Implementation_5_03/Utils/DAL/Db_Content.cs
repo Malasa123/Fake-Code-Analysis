@@ -55,13 +55,10 @@ namespace Fake_Code_Analysis_Implementation_5_03.Utils.DAL
                 connection.Open();
                 StringBuilder sb = new StringBuilder();
                 sb.Append("INSERT INTO CodeScans (UserId,RawCode,ProgramLanguage)");
-                sb.Append("VALUES (@UserId, @RawCode, @ProgramLanguage);");
+                sb.Append("VALUES ("+CodeFile.UserId+", "+CodeFile.RawCode+", "+CodeFile.ProgramLanguage+");");
                 String sql = sb.ToString();
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    command.Parameters.AddWithValue("@UserId", CodeFile.UserId);
-                    command.Parameters.AddWithValue("@RawCode", CodeFile.RawCode);
-                    command.Parameters.AddWithValue("@ProgramLanguage", CodeFile.ProgramLanguage);
                     rowsAffected = command.ExecuteNonQuery();
                 }
             }
